@@ -63,8 +63,8 @@ class Asset < ActiveRecord::Base
   has_attached_file :asset,
                     :styles => thumbnails,
                     :whiny_thumbnails => false,
-                    :url => "/:class/:id/:basename:no_original_style.:extension",
-                    :path => ":rails_root/public/:class/:id/:basename:no_original_style.:extension"
+                    :url => "/system/:class/:id/:basename:no_original_style.:extension",
+                    :path => ":rails_root/public/system/:class/:id/:basename:no_original_style.:extension"
                                  
   has_many :page_attachments, :dependent => :destroy
   has_many :pages, :through => :page_attachments
