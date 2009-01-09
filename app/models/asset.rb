@@ -65,7 +65,11 @@ class Asset < ActiveRecord::Base
                     :whiny_thumbnails => false,
                     #:url => "/system/:class/:id/:basename:no_original_style.:extension",
                     #:path => ":rails_root/public/system/:class/:id/:basename:no_original_style.:extension"
+                    :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+                    :bucket => "eu.sinterklaas.#{RAILS_ENV}",
                     :storage => :s3,
+                    # http://thoughtbot.lighthouseapp.com/projects/8794/tickets/19-incorrect-s3-url
+                    :url => ":s3_domain_url",
                     :path => ":class/:id/:basename:no_original_style.:extension"
                                  
   has_many :page_attachments, :dependent => :destroy
