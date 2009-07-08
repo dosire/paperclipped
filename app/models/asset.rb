@@ -71,7 +71,7 @@ class Asset < ActiveRecord::Base
   # For local storage (oog)
 
   has_attached_file :asset,
-                    :styles => thumbnails,
+                    :styles => thumbnail_sizes,
                     :whiny_thumbnails => false,
                     :url => "/system/:class/:id/:basename:no_original_style.:extension",
                     :path => ":rails_root/public/system/:class/:id/:basename:no_original_style.:extension"
