@@ -55,18 +55,26 @@ class Asset < ActiveRecord::Base
   end
   
   # order_by 'title'
+  
+  # For S3 storage (sinterklaas)
     
+  #~ has_attached_file :asset,
+                    #~ :styles => thumbnail_sizes,
+                    #~ :whiny_thumbnails => false,
+                    #~ :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+                    #~ :bucket => "eu.sinterklaas.#{RAILS_ENV}",
+                    #~ :storage => :s3,
+                    #~ # http://thoughtbot.lighthouseapp.com/projects/8794/tickets/19-incorrect-s3-url
+                    #~ :url => ":s3_domain_url",
+                    #~ :path => ":class/:id/:basename:no_original_style.:extension"
+                    
+  # For local storage (oog)
+
   has_attached_file :asset,
-                    :styles => thumbnail_sizes,
+                    :styles => thumbnails,
                     :whiny_thumbnails => false,
-                    #:url => "/system/:class/:id/:basename:no_original_style.:extension",
-                    #:path => ":rails_root/public/system/:class/:id/:basename:no_original_style.:extension"
-                    :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
-                    :bucket => "eu.sinterklaas.#{RAILS_ENV}",
-                    :storage => :s3,
-                    # http://thoughtbot.lighthouseapp.com/projects/8794/tickets/19-incorrect-s3-url
-                    :url => ":s3_domain_url",
-                    :path => ":class/:id/:basename:no_original_style.:extension"
+                    :url => "/system/:class/:id/:basename:no_original_style.:extension",
+                    :path => ":rails_root/public/system/:class/:id/:basename:no_original_style.:extension"
                                  
   has_many :page_attachments, :dependent => :destroy
   has_many :pages, :through => :page_attachments
